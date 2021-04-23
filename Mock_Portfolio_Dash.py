@@ -12,7 +12,8 @@ from datetime import datetime
 import pandas as pd
 import numpy as np
 
-app = dash.Dash()
+
+app = dash.Dash(url_base_pathname=os.environ["BASE_URL"])
 
 tickers = pd.read_csv('tickers.csv')
 tickers.set_index('Ticker', inplace=True)
@@ -249,4 +250,4 @@ def update_graph(n_clicks, stock_ticker, start_date, end_date):
 	return fig
 
 if __name__ == '__main__':
-    app.run_server()
+    app.run_server(host=os.environ["HOST"], port=os.environ["PORT"])
